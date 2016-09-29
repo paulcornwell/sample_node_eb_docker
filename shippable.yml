@@ -1,0 +1,28 @@
+# Language settings
+language: node_js
+
+build:
+  ci:
+    - echo 'CI is running'
+
+  post_ci:
+      # DockerHub
+      - docker build -t="abhijitkini/sample_node_eb_docker:$BRANCH.$BUILD_NUMBER" .
+      - docker push abhijitkini/sample_node_eb_docker:$BRANCH.$BUILD_NUMBER
+      # Addresses botocore version mismatch errors
+      - pip install --upgrade botocore
+
+integrations:
+  deploy:
+    # AWS Integration to deploy Docker image
+    - integrationName: "AWS-int"
+      type: aws
+      application_name: "NodeJSDockerEB-app"
+      env_name: "NodeJSDockerEB-app-dev"
+      region: "us-east-1"
+      image_name: "seamlesscontactstech/node-eb-docker"
+      image_tag: "$BRANCH.$BUILD_NUMBER"
+
+  hub:
+    - integrationName: "docker-int"
+      type: docker
