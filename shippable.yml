@@ -7,8 +7,8 @@ build:
 
   post_ci:
       # DockerHub
-      - docker build -t="abhijitkini/sample_node_eb_docker:$BRANCH.$BUILD_NUMBER" .
-      - docker push abhijitkini/sample_node_eb_docker:$BRANCH.$BUILD_NUMBER
+      - docker build -t="seamlesscontactstech/node_eb_docker:$BRANCH.$BUILD_NUMBER" .
+      - docker push seamlesscontactstech/node_eb_docker:$BRANCH.$BUILD_NUMBER
       # Addresses botocore version mismatch errors
       - pip install --upgrade botocore
 
