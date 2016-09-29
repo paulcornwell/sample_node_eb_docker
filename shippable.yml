@@ -7,8 +7,8 @@ build:
 
   post_ci:
       # DockerHub
-      - docker build -t="seamlesscontactstech/node_eb_docker:$BRANCH.$BUILD_NUMBER" .
-      - docker push seamlesscontactstech/node_eb_docker:$BRANCH.$BUILD_NUMBER
+      - docker build -t="seamlesscontactstech/node-docker-eb:$BRANCH.$BUILD_NUMBER" .
+      - docker push seamlesscontactstech/node-docker-eb:$BRANCH.$BUILD_NUMBER
       # Addresses botocore version mismatch errors
       - pip install --upgrade botocore
 
@@ -20,7 +20,7 @@ integrations:
       application_name: "NodeJSDockerEB-app"
       env_name: "NodeJSDockerEB-app-dev"
       region: "us-east-1"
-      image_name: "seamlesscontactstech/node-eb-docker"
+      image_name: "seamlesscontactstech/node-docker-eb"
       image_tag: "$BRANCH.$BUILD_NUMBER"
 
   hub:
